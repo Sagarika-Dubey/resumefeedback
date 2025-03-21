@@ -10,7 +10,8 @@ import os
 
 # Initialize Flask app
 app = Flask(__name__)
-
+nltk.download('punkt')
+nltk.download('stopwords')
 # Download necessary NLTK resources
 try:
     nltk.data.find('tokenizers/punkt')
