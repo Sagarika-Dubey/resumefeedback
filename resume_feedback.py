@@ -9,7 +9,7 @@ from collections import Counter
 from flask import Flask, request, jsonify
 from io import BytesIO
 
-NLTK_DIR = "/temp/nltk_data"  # Render-specific location
+NLTK_DIR = "/tmp/nltk_data"  # Render-specific location
 os.makedirs(NLTK_DIR, exist_ok=True)
 
 # Append to nltk path
