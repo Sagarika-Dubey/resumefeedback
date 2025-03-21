@@ -9,29 +9,26 @@ from collections import Counter
 from flask import Flask, request, jsonify
 from io import BytesIO
 
-# Create a persistent directory for NLTK data that Render can access
-nltk_data_path = os.path.join(os.getcwd(), 'nltk_data')
-os.makedirs(nltk_data_path, exist_ok=True)
+NLTK_DIR = "/app/nltk_data"  # Render-specific location
+os.makedirs(NLTK_DIR, exist_ok=True)
 
-# Add this path to NLTK's search paths
-nltk.data.path.append(nltk_data_path)
+# Append to nltk path
+nltk.data.path.append(NLTK_DIR)
 
-# Download NLTK data once at startup
-nltk.download('punkt', download_dir=nltk_data_path)
-nltk.download('stopwords', download_dir=nltk_data_path)
-
-# Now try using nltk normally
-from nltk.tokenize import word_tokenize
+# Download required NLTK resources
+nltk.download("punkt", download_dir=NLTK_DIR)
+nltk.download("stopwords", download_dir=NLTK_DIR)
 
 # Initialize Flask app
 app = Flask(__name__)
 # Download necessary NLTK resources
-try:
+'''try:
     nltk.data.find('tokenizers/punkt')
     nltk.data.find('corpora/stopwords')
 except LookupError:
     nltk.download('punkt')
-    nltk.download('stopwords')
+    nltk.download('stopwords')'
+    '''
 
 # Define skills categories
 TECHNICAL_SKILLS = [
