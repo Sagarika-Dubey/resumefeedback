@@ -1,6 +1,14 @@
 import re
+import os
 import PyPDF2
 import nltk
+
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from collections import Counter
+from flask import Flask, request, jsonify
+from io import BytesIO
+
 # Create a persistent directory for NLTK data that Render can access
 nltk_data_path = os.path.join(os.getcwd(), 'nltk_data')
 os.makedirs(nltk_data_path, exist_ok=True)
@@ -11,13 +19,6 @@ nltk.data.path.append(nltk_data_path)
 # Download NLTK data once at startup
 nltk.download('punkt', download_dir=nltk_data_path)
 nltk.download('stopwords', download_dir=nltk_data_path)
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from collections import Counter
-from flask import Flask, request, jsonify
-from io import BytesIO
-import os
-
 
 # Now try using nltk normally
 from nltk.tokenize import word_tokenize
