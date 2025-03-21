@@ -10,8 +10,17 @@ import os
 
 # Initialize Flask app
 app = Flask(__name__)
-nltk.download('punkt')
-nltk.download('stopwords')
+
+nltk_data_path = "/tmp/nltk_data"
+if not os.path.exists(nltk_data_path):
+    os.makedirs(nltk_data_path)
+
+nltk.data.path.append(nltk_data_path)
+
+# Download necessary NLTK data
+nltk.download('punkt', download_dir=nltk_data_path)
+nltk.download('stopwords', download_dir=nltk_data_path)  # If you use stopwords
+
 # Download necessary NLTK resources
 try:
     nltk.data.find('tokenizers/punkt')
@@ -476,4 +485,4 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 if __name__ == '__main__':
     # Run the app
     port = int(os.environ.get('PORT', 5002))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=True)
